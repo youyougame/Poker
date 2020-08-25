@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TurnActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/turnAppBar"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/turnToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/turnList"
+        android:layout_below="@+id/turnAppBar"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/turnText"
+            android:text="順番と各プレーヤーの設定します"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="BTN"
+                android:textSize="20sp"
+                android:id="@+id/turnText1"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit1"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="SB"
+                android:textSize="20sp"
+                android:id="@+id/turnText2"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit2"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="BB"
+                android:textSize="20sp"
+                android:id="@+id/turnText3"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit3"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="UTG"
+                android:textSize="20sp"
+                android:id="@+id/turnText4"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit4"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner4"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="5"
+                android:textSize="20sp"
+                android:id="@+id/turnText5"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit5"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="6"
+                android:textSize="20sp"
+                android:id="@+id/turnText6"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit6"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner6"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="7"
+                android:textSize="20sp"
+                android:id="@+id/turnText7"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit7"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner7"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="8"
+                android:textSize="20sp"
+                android:id="@+id/turnText8"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit8"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner8"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="9"
+                android:textSize="20sp"
+                android:id="@+id/turnText9"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit9"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner9"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="20sp"
+                android:id="@+id/turnText10"/>
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:id="@+id/turnEdit10"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/turnSpinner10"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/turnList"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/newPlayerButton"
+                android:text="プレイヤー新規登録"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/sameChipsButton"
+                android:text="全員同額"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/turnDoneButton"
+                android:text="決定"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
