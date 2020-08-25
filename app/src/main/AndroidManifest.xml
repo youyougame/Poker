@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.poker">
+    package="com.tableplay.poker">
 
     <application
         android:name="jp.playing.table.poker.TaskApp"
