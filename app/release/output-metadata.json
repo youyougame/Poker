@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.poker",
+  "applicationId": "com.tableplay.poker",
   "variantName": "release",
   "elements": [
     {
