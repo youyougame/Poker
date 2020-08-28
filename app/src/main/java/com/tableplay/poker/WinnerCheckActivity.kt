@@ -39,7 +39,6 @@ class WinnerCheckActivity : AppCompatActivity() {
     private var smallBlind = 0
     private var tableChips = 0
     private var tableTotalChips = 0
-    private var startNum = 0
     private var flopNum = 0
     private var preFlopNum = 0
     private var bigBlindNum = 0
@@ -510,13 +509,11 @@ class WinnerCheckActivity : AppCompatActivity() {
             mRealm.beginTransaction()
             mMember = Member()
 
-            val memberRealmResults = mRealm.where(Member::class.java).findAll()
             var foldCount = 0
             var meFold = "play"
             for (i in 1..memberNum) {
                 val memberPlayerNumRealmResults = mRealm.where(Member::class.java).equalTo("memberRound", i).findAll()
                 val playerNumId = memberPlayerNumRealmResults.max("id")!!.toInt()
-                Log.d("kotlintest", "memberId:" + playerNumId.toString())
                 var member = mRealm.where(Member::class.java).equalTo("id", playerNumId ).findFirst()
                 if (member!!.memberChips > 0) {
                     member!!.playingCheck = "play"
@@ -527,7 +524,6 @@ class WinnerCheckActivity : AppCompatActivity() {
                         meFold = "fold"
                     }
                 }
-                Log.d("kotlintest", "playerNumId：" + playerNumId.toString() + "　名前：" + member!!.memberName + "　チップ数：" + member!!.memberChips.toString() + "　結果：" + member!!.playingCheck + "　fold数：" + foldCount.toString())
             }
 
 
@@ -536,38 +532,25 @@ class WinnerCheckActivity : AppCompatActivity() {
 
             val foldNum = memberNum - 1
 
-            Log.d("kotlintest", "foldCount:" + foldCount.toString())
-            Log.d("kotlintest", "memberNum - 1:" + foldNum.toString())
 
             if (foldCount == foldNum || meFold == "fold") {
-                Log.d("kotlintest", "終了通過")
                 val intent = Intent(this@WinnerCheckActivity, MainActivity::class.java)
                 startActivity(intent)
             } else {
-                Log.d("kotlintest", "継続通過1")
 
                 do {
-                    Log.d("kotlintest", "継続通過1-1")
-                    Log.d("kotlintest", "btn:" + btn.toString())
-                    Log.d("kotlintest", "memberNum:" + memberNum)
                     if (btn == memberNum) {
                         btn = 1
-                        Log.d("kotlintest", "継続通過1-2")
                     } else {
                         btn++
-                        Log.d("kotlintest", "継続通過1-3")
                     }
-                    Log.d("kotlintest", "継続通過1-4")
                     val numberRealmResluts = mRealm.where(Member::class.java).equalTo("memberRound", btn).findAll()
                     val numberId = numberRealmResluts.max("id")!!.toInt()
                     val number = mRealm.where(Member::class.java).equalTo("id", numberId).findFirst()
-                    Log.d("kotlintest", "継続通過1-5")
-                    Log.d("kotlintest", "memberChips:" + number!!.memberChips.toString())
                 } while (number!!.memberChips == 0)
 
                 preFlopNum = btn
 
-                Log.d("kotlintest", "継続通過2")
 
                 do {
                     if (preFlopNum == memberNum) {
@@ -582,8 +565,6 @@ class WinnerCheckActivity : AppCompatActivity() {
 
                 bigBlindNum = preFlopNum
 
-                Log.d("kotlintest", "継続通過3")
-
                 do {
                     if (bigBlindNum == memberNum) {
                         bigBlindNum = 1
@@ -596,8 +577,6 @@ class WinnerCheckActivity : AppCompatActivity() {
                 } while (number!!.memberChips == 0)
 
                 flopNum = bigBlindNum
-
-                Log.d("kotlintest", "継続通過4")
 
                 do {
                     if (flopNum == memberNum) {
@@ -612,16 +591,8 @@ class WinnerCheckActivity : AppCompatActivity() {
 
                 foldPlayer = foldCount
 
-                Log.d("kotlintest", "btn:" + btn.toString() + " preFlopNum:" + preFlopNum.toString() + " bigBlindNum:" + bigBlindNum.toString() + " flopNum:" + flopNum.toString())
                 //HandActivityへ移動
                 val intent = Intent(this@WinnerCheckActivity, HandActivity::class.java)
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[count]:" + count.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[myRound]:" + myRound.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[flopNum]:" + flopNum.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[playingNum]:" + playingNum.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[smallBlind]:" + smallBlind.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[bigBlind]:" + bigBlind.toString())
-                Log.d("kotlintest", "WinnerCheckActivity -> CardActivity[btn]:" + btn.toString())
 
                 intent.putExtra("memberNum", memberNum)
                 intent.putExtra("flopNum", flopNum)
@@ -642,7 +613,6 @@ class WinnerCheckActivity : AppCompatActivity() {
     }
 
     private fun playerSet() {
-        val memberRealmResults = mRealm.where(Member::class.java).findAll()
 
         //プレイヤー名の設定
         when (memberNum) {
@@ -2998,7 +2968,6 @@ class WinnerCheckActivity : AppCompatActivity() {
     }
 
     private fun foldSetting() {
-        val memberRealmResults = mRealm.where(Member::class.java).findAll()
 
         when(memberNum) {
             2 -> {
@@ -3544,8 +3513,6 @@ class WinnerCheckActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        val memberRealmResults = mRealm.where(Member::class.java).findAll()
-        val turnRealmResults = mRealm.where(Turn::class.java).findAll()
 
         mRealm.beginTransaction()
         mMember = Member()

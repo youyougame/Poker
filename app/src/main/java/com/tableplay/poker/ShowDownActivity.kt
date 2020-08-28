@@ -3,18 +3,11 @@ package com.tableplay.poker
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import io.realm.Realm
-import jp.playing.table.poker.Hand
 import jp.playing.table.poker.Member
-import jp.playing.table.poker.Turn
 import kotlinx.android.synthetic.main.activity_show_down.*
 
 class ShowDownActivity : AppCompatActivity() {
-
-    private var mTurn: Turn? = null
-
-    private var mHand: Hand? = null
 
     private var mMember: Member? = null
 
@@ -38,14 +31,6 @@ class ShowDownActivity : AppCompatActivity() {
 
     private var memberRound = 1 //入力しているプレーヤー
 
-    private var hand1 = ""
-
-    private var hand2 = ""
-
-    private var onePairNum = 0
-
-    private var finalHand = ""
-
     private var memberNum = 0
     private var game_id = 0
     private var count = 0
@@ -64,7 +49,6 @@ class ShowDownActivity : AppCompatActivity() {
     private var smallBlind = 0
     private var tableChips = 0
     private var tableTotalChips = 0
-    private var startNum = 0
     private var flopNum = 0
     private var preFlopNum = 0
     private var bigBlindNum = 0
@@ -119,24 +103,12 @@ class ShowDownActivity : AppCompatActivity() {
         cardSetting4()
         cardSetting5()
 
-        val memberRealmResults = mRealm.where(Member::class.java).findAll()
         val memberPlayerNumRealmResults = mRealm.where(Member::class.java).equalTo("memberRound", memberRound).findAll()
         val playerNumId = memberPlayerNumRealmResults.max("id")!!.toInt()
         val memberData = mRealm.where(Member::class.java).equalTo("id", playerNumId).findFirst()
         val memberPlayingCheck = memberData!!.playingCheck
-        val dataPlayerId = memberData!!.member_id
         val memberName = memberData!!.memberName
 
-//        val turnRealmResults = mRealm.where(Turn::class.java).findAll()
-//        val turnPlayerNumRealmResults = mRealm.where(Turn::class.java).equalTo("player", memberName).findAll()
-//        val playerId = turnPlayerNumRealmResults.max("id")!!.toInt()
-//        val turnData = mRealm.where(Turn::class.java).equalTo("id", playerId).findFirst()
-
-//        val memberPlayingCheck = memberRealmResults[playerNumId]!!.playingCheck //foldしたかチェック
-//        val dataPlayerId = memberRealmResults[playerNumId]!!.member_id //該当プレイヤーのid
-//        val memberName = memberRealmResults[playerNumId]!!.memberName //該当プレイヤーの名前
-
-        Log.d("kotlintest", "memberRound:" + memberRound.toString() + " playerNumId:" + playerNumId.toString() + " memberPlayingCheck:" + memberPlayingCheck + " memberName:" + memberName)
 
         if (memberPlayingCheck != "fold" && memberName != "自分") {
             //titleBerに名前を追加
@@ -150,36 +122,11 @@ class ShowDownActivity : AppCompatActivity() {
                 memberData!!.hand1 = ""
                 memberData!!.hand2 = ""
                 mRealm.copyToRealmOrUpdate(mMember!!)
-
-//                mTurn = Turn()
-//                turnData!!.hand1 = ""
-//                turnData!!.hand2 = ""
-//                mRealm.copyToRealmOrUpdate(mTurn)
                 mRealm.commitTransaction()
             }
             memberRound++
             if (memberRound > memberNum) {
                 val intent = Intent(this@ShowDownActivity, WinnerCheckActivity::class.java)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[count]:" + count.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[round]:" + round)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[round_count]:" + round_count.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[roundNum]:" + roundNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[myRound]:" + myRound.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[flopNum]:" + flopNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[preFlopNum]:" + preFlopNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlindNum]" + bigBlindNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[playingNum]:" + playingNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[foldPlayer]:" + foldPlayer.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[smallBlind]:" + smallBlind.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlind]:" + bigBlind.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableChips]:" + tableChips.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableTotalChips]:" + tableTotalChips.toString())
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlind]:" + bigBlind)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[smallBlind]:" + smallBlind)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableChips]:" + tableChips)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableTotalChips]:" + tableTotalChips)
-                Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[btn]:" + btn.toString())
 
                 intent.putExtra("memberNum", memberNum)
                 intent.putExtra("game_id", game_id)
@@ -211,26 +158,6 @@ class ShowDownActivity : AppCompatActivity() {
                 startActivity(intent)
             } else {
                 val intent = Intent(this@ShowDownActivity, ShowDownActivity::class.java)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[count]:" + count.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[round]:" + round)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[round_count]:" + round_count.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[roundNum]:" + roundNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[myRound]:" + myRound.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[flopNum]:" + flopNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[preFlopNum]:" + preFlopNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlindNum]" + bigBlindNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[playingNum]:" + playingNum.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[foldPlayer]:" + foldPlayer.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[smallBlind]:" + smallBlind.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlind]:" + bigBlind.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableChips]:" + tableChips.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips.toString())
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlind]:" + bigBlind)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[smallBlind]:" + smallBlind)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableChips]:" + tableChips)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips)
-                Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[btn]:" + btn.toString())
 
                 intent.putExtra("memberNum", memberNum)
                 intent.putExtra("game_id", game_id)
@@ -517,10 +444,8 @@ class ShowDownActivity : AppCompatActivity() {
                     }
                     mRealm.beginTransaction()
                     mMember = Member()
-//                    mTurn = Turn()
 
                     val memberIdRealmResults = mRealm.where(Member::class.java).equalTo("id", playerNumId).findAll()
-                    Log.d("kotlintest", "memberId:" + playerNumId.toString())
                     val memberMaxId = memberIdRealmResults.max("id")!!.toInt()
                     val member = mRealm.where(Member::class.java).equalTo("id", memberMaxId).findFirst()
 
@@ -529,42 +454,11 @@ class ShowDownActivity : AppCompatActivity() {
                     member!!.hand2 = playerHand2
 
                     mRealm.copyToRealmOrUpdate(mMember!!)
-
-//                    val turnIdRealmResults = mRealm.where(Turn::class.java).equalTo("id", playerId).findAll()
-//                    Log.d("kotlintest", "turnId:" + playerId.toString())
-//                    val turnMaxId = turnIdRealmResults.max("id")!!.toInt()
-//                    val turn = mRealm.where(Member::class.java).equalTo("id", turnMaxId).findFirst()
-//
-//                    turn!!.hand1 = playerHand1
-//                    turn!!.hand1 = playerHand2
-//
-//                    mRealm.copyToRealmOrUpdate(mTurn!!)
-
                     mRealm.commitTransaction()
                     memberRound++
                     if (memberRound < memberNum) {
                         //ShowDownActivityへ
                         val intent = Intent(this@ShowDownActivity, ShowDownActivity::class.java)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[count]:" + count.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[round]:" + round)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[round_count]:" + round_count.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[roundNum]:" + roundNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[myRound]:" + myRound.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[flopNum]:" + flopNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[preFlopNum]:" + preFlopNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlindNum]" + bigBlindNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[playingNum]:" + playingNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[foldPlayer]:" + foldPlayer.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[smallBlind]:" + smallBlind.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlind]:" + bigBlind.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableChips]:" + tableChips.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[bigBlind]:" + bigBlind)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[smallBlind]:" + smallBlind)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableChips]:" + tableChips)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips)
-                        Log.d("kotlintest", "ShowDownActivity -> ShowDownActivity[btn]:" + btn.toString())
 
                         intent.putExtra("memberNum", memberNum)
                         intent.putExtra("game_id", game_id)
@@ -599,26 +493,6 @@ class ShowDownActivity : AppCompatActivity() {
 
                         //WinnerCheckActivityへ
                         val intent = Intent(this@ShowDownActivity, WinnerCheckActivity::class.java)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[count]:" + count.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[round]:" + round)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[round_count]:" + round_count.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[roundNum]:" + roundNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[myRound]:" + myRound.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[flopNum]:" + flopNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[preFlopNum]:" + preFlopNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlindNum]" + bigBlindNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[playingNum]:" + playingNum.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[foldPlayer]:" + foldPlayer.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[smallBlind]:" + smallBlind.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlind]:" + bigBlind.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableChips]:" + tableChips.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableTotalChips]:" + tableTotalChips.toString())
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[bigBlind]:" + bigBlind)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[smallBlind]:" + smallBlind)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableChips]:" + tableChips)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[tableTotalChips]:" + tableTotalChips)
-                        Log.d("kotlintest", "ShowDownActivity -> WinnerCheckActivity[btn]:" + btn.toString())
 
                         intent.putExtra("memberNum", memberNum)
                         intent.putExtra("game_id", game_id)

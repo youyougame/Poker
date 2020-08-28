@@ -15,10 +15,6 @@ class DataDetailActivity : AppCompatActivity() {
 
     private lateinit var mDataDetailAdapter: DataDetailAdapter
 
-    private var mGame: Game? = null
-
-    private var mTurn: Turn? = null
-
     private var dataId = 0
 
     private val mRealmListener = object : RealmChangeListener<Realm> {

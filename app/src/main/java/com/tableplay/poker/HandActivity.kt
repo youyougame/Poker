@@ -17,8 +17,6 @@ class HandActivity : AppCompatActivity() {
 
     private var mMember: Member? = null
 
-    private var mTurn: Turn? = null
-
     private lateinit var mRealm: Realm
 
     //チップ一桁目
@@ -46,8 +44,6 @@ class HandActivity : AppCompatActivity() {
     private var playerHand1 = ""
 
     private var playerHand2 = ""
-
-    private var countCheack = 0
 
     private var flopNum = 0
 
@@ -105,22 +101,6 @@ class HandActivity : AppCompatActivity() {
         sb = intent.getIntExtra("SB", 0)
         bb = intent.getIntExtra("BB", 0)
         foldPlayer = intent.getIntExtra("foldPlayer", 0)
-
-        //チップ数の表示
-//        if (secondNum == "") {
-//            handChipsText.text = firstNum.toString()
-//        } else {
-//            handChipsText.text = firstNum.toString() + secondNum
-//        }
-//
-//        if (smallSecondNum == "") {
-//            smallChipsText.text = smallFirstNum.toString()
-//        } else {
-//            smallChipsText.text = smallFirstNum.toString() + smallSecondNum
-//        }
-
-        Log.d("kotlintest", "bigBlind:" + bigBlind)
-        Log.d("kotlintest", "smallBlind:" + smallBlind)
 
         if (bigBlind == 0) {
             handChipsText.setText(firstNum.toString())
@@ -547,7 +527,6 @@ class HandActivity : AppCompatActivity() {
                                     1
                                 }
                             mHand!!.id = identifier
-                            Log.d("kotlintest", "保存したハンド：" + identifier.toString())
 
                             mHand!!.count = count
 
@@ -560,17 +539,6 @@ class HandActivity : AppCompatActivity() {
                         mHand!!.smallBlind = smallChipsText.text.toString().toInt()
 
                         mMember = Member()
-
-//                        val memberDataRealmResults = mRealm.where(Member::class.java).equalTo("memberName", "自分").findAll()
-//                        val memberRealmResultsId = memberDataRealmResults.max("id")!!.toInt()
-//                        val memberAdd = mRealm.where(Member::class.java).equalTo("id", memberRealmResultsId).findFirst()
-//
-//                        Log.d("kotlintest", "Handのプレイヤー名" + memberAdd!!.memberName)
-//
-//                        Log.d("kotlintest", "memberId:" + memberRealmResultsId.toString())
-//
-//                        memberAdd!!.hand1 = playerHand1
-//                        memberAdd!!.hand2 = playerHand2
 
                         for (i in 1..memberNum) {
                             val memberRealmResults = mRealm.where(Member::class.java).equalTo("memberRound", i).findAll()
@@ -611,21 +579,6 @@ class HandActivity : AppCompatActivity() {
                         mRealm.copyToRealmOrUpdate(mHand!!)
                         mRealm.commitTransaction()
 
-                        //削除予定
-                        val handRealmResults = mRealm.where(Hand::class.java).equalTo("game_id", game_id).and().equalTo("count", count).findAll()
-                        Log.d("kotlintest", "データ：" + handRealmResults.toString())
-                        Log.d("kotlintest", "数字：" + count.toString())
-                        val handId = handRealmResults.max("id")!!.toInt()
-                        val handData = mRealm.where(Hand::class.java).equalTo("id", handId).findFirst()
-                        Log.d("kotlintest", "HandId：" + handData!!.id.toString())
-                        Log.d("kotlintest", "Hand：" + handData!!.count.toString())
-                        Log.d("kotlintest", "Hand：" + handData!!.hand1)
-                        Log.d("kotlintest", "Hand：" + handData!!.hand2)
-                        Log.d("kotlintest", "Hand1：" + handData!!.table1)
-                        Log.d("kotlintest", "Hand2：" + handData!!.table2)
-                        Log.d("kotlintest", "Hand3：" + handData!!.table3)
-                        Log.d("kotlintest", "Hand4：" + handData!!.table4)
-                        Log.d("kotlintest", "Hand5：" + handData!!.table5)
 
                         if (myRound == flopNum) {
                             roundPlayer = "you"
@@ -635,45 +588,10 @@ class HandActivity : AppCompatActivity() {
 
                         playingNum = flopNum
 
-//                        when (flopNum) {
-//                            1 -> {
-//                                preFlopNum = memberNum - 1
-//                                bigBlindNum = memberNum
-//                            }
-//                            2 -> {
-//                                preFlopNum = memberNum
-//                                bigBlindNum = 1
-//                            }
-//                            else -> {
-//                                preFlopNum = flopNum - 2
-//                                bigBlindNum = flopNum - 1
-//                            }
-//                        }
-
 
                         when (roundPlayer) {
                             "you" -> {
                                 val intent = Intent(this@HandActivity, PlayingActivity::class.java)
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[count]:" + count.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[round]:" + "preflop")
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[round_count]:" + "1")
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[roundNum]:" + "1")
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[myRound]:" + myRound.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[flopNum]:" + flopNum.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[preFlopNum]:" + preFlopNum.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[bigBlindNum]" + bigBlindNum.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[playingNum]:" + playingNum.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[foldPlayer]:" + foldPlayer.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[sameChipsPlayer]:" + "0")
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[smallBlind]:" + smallChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[bigBlind]:" + handChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[tableChips]:" + handChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[tableTotalChips]:" + "0")
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[bigBlind]:" + handChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[smallBlind]:" + smallChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[tableChips]:" + handChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[tableTotalChips]:" + 0)
-                                Log.d("kotlintest", "HandActivity -> PlayingActivity[btn]:" + btn.toString())
 
 
                                 intent.putExtra("memberNum", memberNum.toInt())
@@ -708,26 +626,6 @@ class HandActivity : AppCompatActivity() {
                             "other" -> {
                                 val intent =
                                     Intent(this@HandActivity, MemberPlayingActivity::class.java)
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[count]:" + count.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[round]:" + "preflop")
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[round_count]:" + "1")
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[roundNum]:" + "1")
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[myRound]:" + myRound.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[flopNum]:" + flopNum.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[preFlopNum]:" + preFlopNum.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[bigBlindNum]" + bigBlindNum.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[playingNum]:" + playingNum.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[foldPlayer]:" + foldPlayer.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[sameChipsPlayer]:" + "0")
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[smallBlind]:" + smallChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[bigBlind]:" + handChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[tableChips]:" + handChipsText.text.toString())
-                                Log.d("kotlintest", "HandActivity -> MemberPlayingActivity[tableTotalChips]:" + "0")
-                                Log.d("kotlintest", "HandActivity -> MemnerPlsyingActivity[bigBlind]:" + handChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> MemnerPlsyingActivity[smallBlind]:" + smallChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> MemnerPlsyingActivity[tableChips]:" + handChipsText.text.toString().toInt())
-                                Log.d("kotlintest", "HandActivity -> MemnerPlsyingActivity[tableTotalChips]:" + 0)
-                                Log.d("kotlintest", "HandActivity -> MemnerPlsyingActivity[btn]:" + btn.toString())
 
                                 intent.putExtra("memberNum", memberNum.toInt())
                                 intent.putExtra("game_id", game_id.toInt())

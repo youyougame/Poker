@@ -8,8 +8,6 @@ import kotlinx.android.synthetic.main.activity_add_member.*
 
 class AddMemberActivity : AppCompatActivity() {
 
-    private var mName = ""
-
     private var mUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

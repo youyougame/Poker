@@ -47,10 +47,6 @@ class TurnActivity : AppCompatActivity() {
 
     private var mMemBerPlay: Member? = null
 
-    private var mGame: Game? = null
-
-    private var mUser: User? = null
-
     private lateinit var mRealm: Realm
 
     private var doneChecker1 = "NO"
@@ -81,8 +77,6 @@ class TurnActivity : AppCompatActivity() {
     private var myRound = 0
 
     private var firstRealm = ""
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -589,8 +583,6 @@ class TurnActivity : AppCompatActivity() {
                             addPlayer()
 
 
-                            val realmrealm = mRealm.where(Member::class.java).findAll()
-                            Log.d("kotlintest", realmrealm.toString())
                             val intent = Intent(this@TurnActivity, HandActivity::class.java)
                             intent.putExtra("memberNum", mMember)
                             intent.putExtra("roundPlayer", roundPlayer)
@@ -617,12 +609,9 @@ class TurnActivity : AppCompatActivity() {
 
     //プレイヤー登録
     private fun addPlayer() {
-        Log.d("kotlintest", "通過1")
 
         val userRealmResutls = mRealm.where(User::class.java).contains("name", String()).findAll()
         val length = userRealmResutls.size
-
-        Log.d("kotlintest", "通過2")
 
         var playerId1 = ""
         var playerId2 = ""
@@ -635,10 +624,7 @@ class TurnActivity : AppCompatActivity() {
         var playerId9 = ""
         var playerId10 = ""
 
-        Log.d("kotlintest", "通過3")
-
         for (i in 0 .. length - 1) {
-            Log.d("kotlintest", "通過4")
             val name = userRealmResutls[i]!!.name
             if (name == spinnerText1) {
                 playerId1 = i.toString()
@@ -708,14 +694,11 @@ class TurnActivity : AppCompatActivity() {
             }
         }
 
-        Log.d("kotlintest", "通過5")
-
         val gameRealmResults = mRealm.where(Game::class.java).findAll()
 
         gameLength = gameRealmResults.max("id")!!.toInt()
 
         mRealm.beginTransaction()
-        Log.d("kotlintest", "通過6")
 
         var round = 1
 
@@ -723,10 +706,7 @@ class TurnActivity : AppCompatActivity() {
 
         mPlayer = Player()
 
-        Log.d("kotlintest", "通過7")
-
         for (i  in userArray) {
-            Log.d("kotlintest", "通過8")
             if (i != "") {
                 val playerRealmResults = mRealm.where(Player::class.java).findAll()
 
@@ -756,7 +736,6 @@ class TurnActivity : AppCompatActivity() {
 
         for (i in memberArray) {
             if (i != "") {
-                Log.d("kotlintest", "通過9")
                 val memberRealmResults = mRealm.where(Member::class.java).findAll()
 
                 val identifier: Int =
@@ -766,7 +745,6 @@ class TurnActivity : AppCompatActivity() {
                         0
                     }
                 mMemBerPlay!!.id = identifier
-                Log.d("kotlintest","Member保存：" + identifier.toString())
                 mMemBerPlay!!.hand_count = 1
                 mMemBerPlay!!.memberName = i
                 mMemBerPlay!!.memberRound = playRound
@@ -778,7 +756,6 @@ class TurnActivity : AppCompatActivity() {
                     firstRealm = i
                 }
 
-                Log.d("kotlintest", "通過10")
 
                 when (i) {
                     spinnerText1 -> if (playerId1 != "") {mMemBerPlay!!.member_id = playerId1}
@@ -794,7 +771,6 @@ class TurnActivity : AppCompatActivity() {
 
                 }
 
-                Log.d("kotlintest", "通過11")
 
                 when (playRound) {
                     1 -> mMemBerPlay!!.memberChips = chips1.toInt()
@@ -810,17 +786,8 @@ class TurnActivity : AppCompatActivity() {
 
                 }
 
-                Log.d("kotlintest", "id:" + mMemBerPlay!!.id.toString())
-                Log.d("kotlintest", "hand_count:" + mMemBerPlay!!.hand_count.toString())
-                Log.d("kotlintest", "memberName:" + mMemBerPlay!!.memberName)
-                Log.d("kotlintest", "memberRound:" + mMemBerPlay!!.memberRound.toString())
-                Log.d("kotlintest", "game_id:" + mMemBerPlay!!.game_id.toString())
-                Log.d("kotlintest", "playingCheck:" + mMemBerPlay!!.playingCheck)
-                Log.d("kotlintest", "member_id:" + mMemBerPlay!!.member_id)
-                Log.d("kotlintest", "memberChips:" + mMemBerPlay!!.memberChips.toString())
 
                 mRealm.copyToRealmOrUpdate(mMemBerPlay!!)
-                Log.d("kotlintest", "通過12")
 
             }
 

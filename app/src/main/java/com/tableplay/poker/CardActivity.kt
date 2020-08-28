@@ -12,11 +12,7 @@ import kotlinx.android.synthetic.main.activity_card.*
 
 class CardActivity : AppCompatActivity() {
 
-    private var mTurn: Turn? = null
-
     private var mHand: Hand? = null
-
-    private var mMember: Member? = null
 
     private lateinit var mRealm: Realm
 
@@ -462,13 +458,10 @@ class CardActivity : AppCompatActivity() {
                             "com3" -> {
                                 if (cardComSet3 == "set") {
                                     cardCom3 = cardSuit + cardNumber1 + cardNumber2
-
-                                    val handRealmResults = mRealm.where(Hand::class.java).findAll()
                                     val hand =
                                         mRealm.where(Hand::class.java).equalTo("game_id", game_id)
                                             .findAll()
                                     val handId = hand.max("id")!!.toInt()
-                                    Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                                     val handDB =
                                         mRealm.where(Hand::class.java).equalTo("id", handId)
                                             .findFirst()
@@ -494,11 +487,9 @@ class CardActivity : AppCompatActivity() {
                             cardNumber1 = ""
                             cardNumber2 = ""
 
-                            val handRealmResults = mRealm.where(Hand::class.java).findAll()
                             val hand =
                                 mRealm.where(Hand::class.java).equalTo("game_id", game_id).findAll()
                             val handId = hand.max("id")!!.toInt()
-                            Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                             val handDB =
                                 mRealm.where(Hand::class.java).equalTo("id", handId)
                                     .findFirst()
@@ -520,11 +511,9 @@ class CardActivity : AppCompatActivity() {
                             cardNumber1 = ""
                             cardNumber2 = ""
 
-                            val handRealmResults = mRealm.where(Hand::class.java).findAll()
                             val hand =
                                 mRealm.where(Hand::class.java).equalTo("game_id", game_id).findAll()
                             val handId = hand.max("id")!!.toInt()
-                            Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                             val handDB =
                                 mRealm.where(Hand::class.java).equalTo("id", handId)
                                     .findFirst()
@@ -594,10 +583,8 @@ class CardActivity : AppCompatActivity() {
                                 if (cardComSet5 == "set") {
                                     cardCom5 = cardSuit + cardNumber1 + cardNumber2
 
-                                    val handRealmResults = mRealm.where(Hand::class.java).findAll()
                                     val hand = mRealm.where(Hand::class.java).equalTo("game_id", game_id).findAll()
                                     val handId = hand.max("id")!!.toInt()
-                                    Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                                     val handDB =
                                         mRealm.where(Hand::class.java).equalTo("id", handId)
                                             .findFirst()
@@ -639,10 +626,8 @@ class CardActivity : AppCompatActivity() {
                                     cardNumber1 = ""
                                     cardNumber2 = ""
 
-                                    val handRealmResults = mRealm.where(Hand::class.java).findAll()
                                     val hand = mRealm.where(Hand::class.java).equalTo("game_id", game_id).findAll()
                                     val handId = hand.max("id")!!.toInt()
-                                    Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                                     val handDB =
                                         mRealm.where(Hand::class.java).equalTo("id", handId)
                                             .findFirst()
@@ -667,10 +652,8 @@ class CardActivity : AppCompatActivity() {
                             cardNumber1 = ""
                             cardNumber2 = ""
 
-                            val handRealmResults = mRealm.where(Hand::class.java).findAll()
                             val hand = mRealm.where(Hand::class.java).equalTo("game_id", game_id).findAll()
                             val handId = hand.max("id")!!.toInt()
-                            Log.d("kotlintest", "保存したハンド：" + hand.max("id")!!.toInt())
                             val handDB =
                                 mRealm.where(Hand::class.java).equalTo("id", handId)
                                     .findFirst()
@@ -1052,67 +1035,6 @@ class CardActivity : AppCompatActivity() {
         cardComSet4 = "set"
     }
 
-    private fun cardGetSetting5() {
-        when (cardCom5){
-            "club1" -> cardComImageView5.setImageResource(R.drawable.club1)
-            "club2" -> cardComImageView5.setImageResource(R.drawable.club2)
-            "club3" -> cardComImageView5.setImageResource(R.drawable.club3)
-            "club4" -> cardComImageView5.setImageResource(R.drawable.club4)
-            "club5" -> cardComImageView5.setImageResource(R.drawable.club5)
-            "club6" -> cardComImageView5.setImageResource(R.drawable.club6)
-            "club7" -> cardComImageView5.setImageResource(R.drawable.club7)
-            "club8" -> cardComImageView5.setImageResource(R.drawable.club8)
-            "club9" -> cardComImageView5.setImageResource(R.drawable.club9)
-            "club10" -> cardComImageView5.setImageResource(R.drawable.club10)
-            "club11" -> cardComImageView5.setImageResource(R.drawable.club11)
-            "club12" -> cardComImageView5.setImageResource(R.drawable.club12)
-            "club13" -> cardComImageView5.setImageResource(R.drawable.club13)
-
-            "diamond1" -> cardComImageView5.setImageResource(R.drawable.diamond1)
-            "diamond2" -> cardComImageView5.setImageResource(R.drawable.diamond2)
-            "diamond3" -> cardComImageView5.setImageResource(R.drawable.diamond3)
-            "diamond4" -> cardComImageView5.setImageResource(R.drawable.diamond4)
-            "diamond5" -> cardComImageView5.setImageResource(R.drawable.diamond5)
-            "diamond6" -> cardComImageView5.setImageResource(R.drawable.diamond6)
-            "diamond7" -> cardComImageView5.setImageResource(R.drawable.diamond7)
-            "diamond8" -> cardComImageView5.setImageResource(R.drawable.diamond8)
-            "diamond9" -> cardComImageView5.setImageResource(R.drawable.diamond9)
-            "diamond10" -> cardComImageView5.setImageResource(R.drawable.diamond10)
-            "diamond11" -> cardComImageView5.setImageResource(R.drawable.diamond11)
-            "diamond12" -> cardComImageView5.setImageResource(R.drawable.diamond12)
-            "diamond13" -> cardComImageView5.setImageResource(R.drawable.diamond13)
-
-            "heart1" -> cardComImageView5.setImageResource(R.drawable.heart1)
-            "heart2" -> cardComImageView5.setImageResource(R.drawable.heart2)
-            "heart3" -> cardComImageView5.setImageResource(R.drawable.heart3)
-            "heart4" -> cardComImageView5.setImageResource(R.drawable.heart4)
-            "heart5" -> cardComImageView5.setImageResource(R.drawable.heart5)
-            "heart6" -> cardComImageView5.setImageResource(R.drawable.heart6)
-            "heart7" -> cardComImageView5.setImageResource(R.drawable.heart7)
-            "heart8" -> cardComImageView5.setImageResource(R.drawable.heart8)
-            "heart9" -> cardComImageView5.setImageResource(R.drawable.heart9)
-            "heart10" -> cardComImageView5.setImageResource(R.drawable.heart10)
-            "heart11" -> cardComImageView5.setImageResource(R.drawable.heart11)
-            "heart12" -> cardComImageView5.setImageResource(R.drawable.heart12)
-            "heart13" -> cardComImageView5.setImageResource(R.drawable.heart13)
-
-            "spade1" -> cardComImageView5.setImageResource(R.drawable.spade1)
-            "spade2" -> cardComImageView5.setImageResource(R.drawable.spade2)
-            "spade3" -> cardComImageView5.setImageResource(R.drawable.spade3)
-            "spade4" -> cardComImageView5.setImageResource(R.drawable.spade4)
-            "spade5" -> cardComImageView5.setImageResource(R.drawable.spade5)
-            "spade6" -> cardComImageView5.setImageResource(R.drawable.spade6)
-            "spade7" -> cardComImageView5.setImageResource(R.drawable.spade7)
-            "spade8" -> cardComImageView5.setImageResource(R.drawable.spade8)
-            "spade9" -> cardComImageView5.setImageResource(R.drawable.spade9)
-            "spade10" -> cardComImageView5.setImageResource(R.drawable.spade10)
-            "spade11" -> cardComImageView5.setImageResource(R.drawable.spade11)
-            "spade12" -> cardComImageView5.setImageResource(R.drawable.spade12)
-            "spade13" -> cardComImageView5.setImageResource(R.drawable.spade13)
-        }
-        cardComSet5 = "set"
-    }
-
     private fun cardComSetting1() {
         when (cardSuit + cardNumber1 + cardNumber2){
             "club1" -> cardComImageView1.setImageResource(R.drawable.club1)
@@ -1427,46 +1349,12 @@ class CardActivity : AppCompatActivity() {
 
         playingNum = preFlopNum
 
-        val handRealmResults = mRealm.where(Hand::class.java).equalTo("game_id", game_id).and().equalTo("count", count).findAll()
-        Log.d("kotlintest", "データ：" + handRealmResults.toString())
-        Log.d("kotlintest", "数字：" + count.toString())
-        val handId = handRealmResults.max("id")!!.toInt()
-        val handData = mRealm.where(Hand::class.java).equalTo("id", handId).findFirst()
-        Log.d("kotlintest", "HandId：" + handData!!.id.toString())
-        Log.d("kotlintest", "Hand：" + handData!!.count.toString())
-        Log.d("kotlintest", "Hand：" + handData!!.hand1)
-        Log.d("kotlintest", "Hand：" + handData!!.hand2)
-        Log.d("kotlintest", "Hand1：" + handData!!.table1)
-        Log.d("kotlintest", "Hand2：" + handData!!.table2)
-        Log.d("kotlintest", "Hand3：" + handData!!.table3)
-        Log.d("kotlintest", "Hand4：" + handData!!.table4)
-        Log.d("kotlintest", "Hand5：" + handData!!.table5)
 
         when (roundPlayer) {
             "you" -> {
 
                 // PlayingActivityへ移動
                 val intent = Intent(this@CardActivity, PlayingActivity::class.java)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[count]:" + count.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[round]:" + roundCheck)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[round_count]:" + round_count.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[roundNum]:" + roundNum.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[myRound]:" + myRound.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[flopNum]:" + flopNum.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[preFlopNum]:" + preFlopNum.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[bigBlindNum]" + bigBlindNum.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[playingNum]:" + playingNum.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[foldPlayer]:" + foldPlayer.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[smallBlind]:" + smallBlind.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[bigBlind]:" + bigBlind.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[tableChips]:" + tableChips.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[tableTotalChips]:" + tableTotalChips.toString())
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[bigBlind]:" + bigBlind)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[smallBlind]:" + smallBlind)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[tableChips]:" + tableChips)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[tableTotalChips]:" + tableTotalChips)
-                Log.d("kotlintest", "CardActivity -> PlayingActivity[btn]:" + btn.toString())
 
                 intent.putExtra("memberNum", memberNum)
                 intent.putExtra("game_id", game_id)
@@ -1501,26 +1389,6 @@ class CardActivity : AppCompatActivity() {
 
                 //MemberPlayingActivityへ移動
                 val intent = Intent(this@CardActivity, MemberPlayingActivity::class.java)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[count]:" + count.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[round]:" + roundCheck)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[round_count]:" + round_count.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[roundNum]:" + roundNum.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[myRound]:" + myRound.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[flopNum]:" + flopNum.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[preFlopNum]:" + preFlopNum.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[bigBlindNum]" + bigBlindNum.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[playingNum]:" + playingNum.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[foldPlayer]:" + foldPlayer.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[smallBlind]:" + smallBlind.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[bigBlind]:" + bigBlind.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[tableChips]:" + tableChips.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[tableTotalChips]:" + tableTotalChips.toString())
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[bigBlind]:" + bigBlind)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[smallBlind]:" + smallBlind)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[tableChips]:" + tableChips)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[tableTotalChips]:" + tableTotalChips)
-                Log.d("kotlintest", "CardActivity -> MemberPlayingActivity[btn]:" + btn.toString())
 
                 intent.putExtra("memberNum", memberNum)
                 intent.putExtra("game_id", game_id)
@@ -1556,43 +1424,11 @@ class CardActivity : AppCompatActivity() {
 
     private fun intentShowDown() {
 
-        val handRealmResults = mRealm.where(Hand::class.java).equalTo("game_id", game_id).and().equalTo("count", count).findAll()
-        Log.d("kotlintest", "データ：" + handRealmResults.toString())
-        Log.d("kotlintest", "数字：" + count.toString())
-        val handId = handRealmResults.max("id")!!.toInt()
-        val handData = mRealm.where(Hand::class.java).equalTo("id", handId).findFirst()
-        Log.d("kotlintest", "HandId：" + handData!!.id.toString())
-        Log.d("kotlintest", "Hand：" + handData!!.count.toString())
-        Log.d("kotlintest", "Hand：" + handData!!.hand1)
-        Log.d("kotlintest", "Hand：" + handData!!.hand2)
-        Log.d("kotlintest", "Hand1：" + handData!!.table1)
-        Log.d("kotlintest", "Hand2：" + handData!!.table2)
-        Log.d("kotlintest", "Hand3：" + handData!!.table3)
-        Log.d("kotlintest", "Hand4：" + handData!!.table4)
-        Log.d("kotlintest", "Hand5：" + handData!!.table5)
+
+
 
         //ShowDownActivityへ移動
         val intent = Intent(this@CardActivity, ShowDownActivity::class.java)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[count]:" + count.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[round]:" + roundCheck)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[round_count]:" + round_count.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[roundNum]:" + roundNum.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[myRound]:" + myRound.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[flopNum]:" + flopNum.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[preFlopNum]:" + preFlopNum.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[bigBlindNum]" + bigBlindNum.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[playingNum]:" + playingNum.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[foldPlayer]:" + foldPlayer.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[sameChipsPlayer]:" + sameChipsPlayer.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[smallBlind]:" + smallBlind.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[bigBlind]:" + bigBlind.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[tableChips]:" + tableChips.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips.toString())
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[bigBlind]:" + bigBlind)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[smallBlind]:" + smallBlind)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[tableChips]:" + tableChips)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[tableTotalChips]:" + tableTotalChips)
-        Log.d("kotlintest", "CardActivity -> ShowDownActivity[btn]:" + btn.toString())
 
         intent.putExtra("memberNum", memberNum)
         intent.putExtra("game_id", game_id)

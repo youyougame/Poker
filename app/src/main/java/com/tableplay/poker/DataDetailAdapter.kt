@@ -129,9 +129,6 @@ class DataDetailAdapter(context: Context) : BaseAdapter() {
         round = turnList[position].round
         playerNum = turnList[position].playerNum
         val id = turnList[position].id
-        val turnId = turnList[position].id
-        Log.d("kotlintest", playerName)
-        Log.d("kotlintest", playerRound.toString())
 
         var memberId = 0
 
@@ -207,7 +204,6 @@ class DataDetailAdapter(context: Context) : BaseAdapter() {
         val maxId = turnMax.max("id")!!.toInt()
         val maxData = mRealm.where(Turn::class.java).equalTo("id", maxId).findFirst()
         val maxDataId = maxData!!.id
-        val maxDataCount = maxData!!.count
 
         showDown1.visibility = View.GONE
         showDown2.visibility = View.GONE
@@ -673,8 +669,6 @@ class DataDetailAdapter(context: Context) : BaseAdapter() {
 
     private fun tableCardSetting() {
         val handRealmResults = mRealm.where(Hand::class.java).equalTo("game_id", turnGameId).and().equalTo("count", count).findAll()
-        Log.d("kotlintest", "データ：" + handRealmResults.toString())
-        Log.d("kotlintest", "数字：" + count.toString())
         val handId = handRealmResults.max("id")!!.toInt()
         val handData = mRealm.where(Hand::class.java).equalTo("id", handId).findFirst()
 

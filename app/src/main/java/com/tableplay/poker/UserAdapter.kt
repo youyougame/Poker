@@ -41,8 +41,4 @@ class UserAdapter(context: Context): BaseAdapter() {
         return convertView
     }
 
-    fun setUserArrayList(userArrayList: ArrayList<User>) {
-        userList = userArrayList
-    }
-
 }

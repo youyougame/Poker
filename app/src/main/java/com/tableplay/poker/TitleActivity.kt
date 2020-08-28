@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -80,7 +79,6 @@ class TitleActivity : AppCompatActivity() {
             }
 
         mGame!!.id = identifier
-        Log.d("kotlintest","Game保存：" + identifier.toString())
 
         //タイトルの設定
         val title = titleNameEdit.text.toString()
